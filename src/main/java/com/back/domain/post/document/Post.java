@@ -1,5 +1,6 @@
 package com.back.domain.post.document;
 
+import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -9,6 +10,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.time.OffsetDateTime;
 
 @Document(indexName = "posts") // posts 인덱스 생성
+@Getter
 public class Post {
     @Id
     private String id;
