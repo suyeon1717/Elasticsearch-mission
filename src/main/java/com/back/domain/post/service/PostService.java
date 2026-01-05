@@ -25,6 +25,16 @@ public class PostService {
         return postRepository.save(post); // 영속성 컨텍스트가 없으므로 변경 시마다 save() 호출 필수
     }
 
+    // Post 목록 조회
+    public List<Post> findAll() {
+        return postRepository.findAll();
+    }
+
+    // Post 단건 조회
+    public Post findById(String id) {
+        return postRepository.findById(id).orElseThrow(()-> new NotFoundException("Post를 찾을 수 없습니다. id: " + id));
+    }
+
     // Post 수정
     public Post update(String id, String title, String content) {
         Post post = findById(id);
@@ -36,13 +46,9 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    // Post 목록 조회
-    public List<Post> findAll() {
-        return postRepository.findAll();
-    }
-
-    // Post 단건 조회
-    public Post findById(String id) {
-        return postRepository.findById(id).orElseThrow(()-> new NotFoundException("Post를 찾을 수 없습니다. id: " + id));
+    // Post 삭제
+    public void delete(String id) {
+        Post post = findById(id);
+        postRepository.delete(post);
     }
 }
