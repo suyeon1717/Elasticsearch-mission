@@ -18,12 +18,14 @@ public class BaseInitData {
     public ApplicationRunner baseInitDataRunner (){
         return args->{
             work1();
+            work2();
         };
     }
 
     private void work1() { // 애플리케이션 시작 시 Post 개수를 로깅하여 연결 확인
         log.debug("애플리케이션 시작, Post 개수: {}",postService.count());
         if (postService.count() == 0){
+            log.debug("샘플 Post 데이터 생성");
             for (int i = 1; i <= 10; i++) {
                 String title = "Sample Post Title " + i;
                 String content = "This is the content of sample post number " + i + ".";
@@ -31,6 +33,13 @@ public class BaseInitData {
                 Post post = postService.create(title, content, author);
                 log.debug("Created Post: {}", post);
             }
+        }
+    }
+
+    private void work2() {
+        log.debug("기존 Post 전체 조회");
+        for (Post post : postService.findAll()) {
+            log.debug("Existing Post: {}", post);
         }
     }
 }
