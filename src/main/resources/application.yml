@@ -3,10 +3,12 @@ spring:
     name: back
   output:
     ansi:
-      enabled: ALWAYS
+      enabled: ALWAYS # 콘솔 출력 시 ANSI 컬러를 항상 활성화 (ALWAYS)
   jackson:
     serialization:
       fail-on-empty-beans: false # 빈 객체 직렬화 시 예외 발생 방지
+  profiles:
+    active: dev # 기본 프로필을 dev로 설정
 logging:
   level:
     com:
